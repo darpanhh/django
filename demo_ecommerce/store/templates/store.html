@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - Products</title>
+</head>
+<style>
+    
+    body{
+        background-color: aliceblue;
+        font-family: 'Times New Roman', Times, serif ;
+    }
+    h1{
+        color:red;
+        text-align:center;
+        font-weight: 900;
+    }
+    
+</style>
+<body>
+    <h1>This is store homepage</h1>
+    <p>Browse our products</p>
+
+    <p><a href="{% url 'add_product' %}"> Add New Product</a></p>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>Rs{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <a href="{% url 'edit_product' product.id %}">Edit</a> |
+                <a href="{% url 'delete_product' product.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No products available. Add one!</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
