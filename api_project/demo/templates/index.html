@@ -14,24 +14,7 @@
 
         </ul>
     </div>
-    <script>
-        let ulID = $('#productID');
-        $.ajax({
-            url:'/api/product/list/',
-            success: function(response){
-                const data = response;
-                data.forEach((item)=>{
-                    ulID.append(`
-                    <li>
-                    Name: ${item.name} Price: ${item.price} Stock: ${item.stock}
-                    </li>
-                    `)
-                })
-            },
-            error:function(response){
-                console.log(response);
-            }
-        });
-    </script>
+
+    
 </body>
 </html>
