@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% if request.user%} <p>Hello! {{request.user.username}} | <a href="/account/logout/">logout{% endif %}</a></p>
+<p>This is content from homepage</p>
+
+<p>Here are the student details </p>
+
+{% for student in students %}
+<p>Name: {{student.name}} Age: {{student.age}} Address: {{student.address}} <a href="/update-student/{{student.id}}/">edit</a> </p>
+{% endfor %}
+{% endblock %}
