@@ -1,0 +1,100 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- NAVBAR -->
+<nav class="blog-navbar navbar navbar-expand-lg"
+    style="margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem;">
+    <a class="blog-brand" href="/home">
+        <i class="fa-solid fa-pen-nib me-2" style="font-size:1.1rem;"></i>BlogSpace
+    </a>
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 py-2 py-lg-0">
+            <li class="nav-item dropdown">
+                <button class="nav-profile-btn dropdown-toggle" type="button" id="profileDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-circle-user"></i> Profile
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li>
+                        <a class="dropdown-item" href="/newpost">
+                            <i class="fa-solid fa-plus-circle" style="color:#a78bfa;"></i> New Post
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/mypost">
+                            <i class="fa-solid fa-bookmark" style="color:#a78bfa;"></i> My Posts
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.1);">
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/signout">
+                            <i class="fa-solid fa-right-from-bracket" style="color:#f87171;"></i> Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-section animated">
+    <div class="hero-badge">
+        <i class="fa-solid fa-fire-flame-curved"></i> Latest Stories
+    </div>
+    <h1 class="hero-title">Explore Stories.<br>Share Ideas.</h1>
+    <p class="hero-sub">Discover insightful articles from writers around the world. Your next great read is just a
+        scroll away.</p>
+    <a href="/newpost" class="btn-primary-grad">
+        <i class="fa-solid fa-pen-to-square"></i> Write a Post
+    </a>
+</div>
+
+<!-- POSTS -->
+<div class="pb-5">
+    <div class="section-header animated animated-delay-1">
+        <h2 class="section-title">Recent Posts</h2>
+        <span class="post-badge">{{ posts|length }} Article{% if posts|length != 1 %}s{% endif %}</span>
+    </div>
+
+    {% if posts %}
+    {% for post in posts %}
+    <div class="blog-card" style="animation-delay: {{ forloop.counter0 }}00ms;">
+        <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="author-avatar">{{ post.author|slice:":1"|upper }}</div>
+            <div>
+                <div class="author-name">{{ post.author }}</div>
+                <div class="post-date"><i class="fa-regular fa-calendar me-1"></i>{{ post.date_posted|date:"F d, Y" }}
+                </div>
+            </div>
+        </div>
+        <hr class="divider">
+        <h3 class="post-title">{{ post.title }}</h3>
+        <p class="post-content">{{ post.content|truncatewords:40 }}</p>
+        {% if post.content|length > 200 %}
+        <a href="#" class="btn-outline-grad mt-2" style="font-size:0.82rem; padding:0.35rem 1rem;">
+            <i class="fa-solid fa-arrow-right"></i> Read More
+        </a>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="empty-state animated animated-delay-2">
+        <div class="empty-icon">📝</div>
+        <h4 style="color:var(--text-primary); font-weight:600;">No posts yet</h4>
+        <p>Be the first to share a story with the world.</p>
+        <a href="/newpost" class="btn-primary-grad mt-2">
+            <i class="fa-solid fa-plus"></i> Create First Post
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

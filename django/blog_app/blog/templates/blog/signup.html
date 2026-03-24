@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block full_page %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- LOGO -->
+            <div class="auth-logo">🚀</div>
+            <h1 class="auth-title">Create Account</h1>
+            <p class="auth-subtitle">Join BlogSpace and start sharing your stories</p>
+
+            <!-- NAME -->
+            <div class="mb-3">
+                <label class="blog-label" for="uname">
+                    <i class="fa-solid fa-user me-1"></i> Your Name
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-user fa-sm"></i>
+                    </span>
+                    <input type="text" class="form-control blog-input" id="uname" name="uname"
+                        placeholder="Enter your full name" style="border-radius:0 10px 10px 0 !important;">
+                </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <label class="blog-label" for="uemail">
+                    <i class="fa-solid fa-envelope me-1"></i> Email Address
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-envelope fa-sm"></i>
+                    </span>
+                    <input type="email" class="form-control blog-input" id="uemail" name="uemail"
+                        placeholder="Enter your email" style="border-radius:0 10px 10px 0 !important;">
+                </div>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-4">
+                <label class="blog-label" for="upassword">
+                    <i class="fa-solid fa-lock me-1"></i> Password
+                </label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-lock fa-sm"></i>
+                    </span>
+                    <input type="password" class="form-control blog-input" id="upassword" name="upassword"
+                        placeholder="Create a password" style="border-radius:0 10px 10px 0 !important;">
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="btn-primary-grad w-100 justify-content-center mb-4"
+                style="padding:0.75rem; font-size:1rem; border-radius:12px;">
+                <i class="fa-solid fa-user-plus"></i> Sign Up
+            </button>
+
+            <!-- LOGIN LINK -->
+            <p class="text-center mb-0" style="color:var(--text-secondary); font-size:0.88rem;">
+                Already have an account?
+                <a href="login" class="auth-link">Login here</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

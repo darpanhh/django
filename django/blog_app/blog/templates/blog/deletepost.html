@@ -1,0 +1,93 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<nav class="blog-navbar navbar navbar-expand-lg"
+    style="margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem;">
+    <a class="blog-brand" href="/home">
+        <i class="fa-solid fa-pen-nib me-2" style="font-size:1.1rem;"></i>BlogSpace
+    </a>
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 py-2 py-lg-0">
+            <li class="nav-item dropdown">
+                <button class="nav-profile-btn dropdown-toggle" type="button" id="profileDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-circle-user"></i> Profile
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li>
+                        <a class="dropdown-item" href="/newpost">
+                            <i class="fa-solid fa-plus-circle" style="color:#a78bfa;"></i> New Post
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/mypost">
+                            <i class="fa-solid fa-bookmark" style="color:#a78bfa;"></i> My Posts
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.1);">
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/signout">
+                            <i class="fa-solid fa-right-from-bracket" style="color:#f87171;"></i> Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="py-5 animated" style="max-width:600px; margin: 0 auto;">
+    <div class="blog-card text-center" style="padding:3rem 2.5rem;">
+
+   
+        <div style="width:80px; height:80px; background:rgba(248,113,113,0.15); border:2px solid rgba(248,113,113,0.3);
+            border-radius:50%; display:flex; align-items:center; justify-content:center;
+            font-size:2rem; margin:0 auto 1.5rem;">
+            🗑️
+        </div>
+
+        <h2
+            style="font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--text-primary); margin-bottom:0.5rem;">
+            Delete This Post?
+        </h2>
+        <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:0.5rem;">
+            You are about to permanently delete:
+        </p>
+        <div style="background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.2);
+            border-radius:10px; padding:1rem 1.5rem; margin-bottom:2rem;">
+            <p style="color:#fca5a5; font-weight:700; font-size:1.05rem; margin:0;">
+                "{{ post.title }}"
+            </p>
+        </div>
+        <p style="color:var(--text-secondary); font-size:0.88rem; margin-bottom:2rem;">
+            This action <strong style="color:#f87171;">cannot be undone</strong>. Are you sure?
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="/mypost" class="btn-outline-grad" style="padding:0.65rem 1.8rem;">
+                    <i class="fa-solid fa-xmark"></i> Cancel
+                </a>
+                <button type="submit" style="background:linear-gradient(135deg,#ef4444,#dc2626); border:none;
+                    color:#fff; border-radius:50px; padding:0.65rem 1.8rem; font-weight:600; font-size:0.95rem;
+                    cursor:pointer; display:inline-flex; align-items:center; gap:0.4rem;
+                    transition:all 0.2s ease;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(239,68,68,0.4)'"
+                    onmouseout="this.style.transform=''; this.style.boxShadow=''">
+                    <i class="fa-solid fa-trash"></i> Yes, Delete It
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

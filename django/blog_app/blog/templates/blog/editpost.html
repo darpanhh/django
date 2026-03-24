@@ -1,0 +1,100 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<nav class="blog-navbar navbar navbar-expand-lg"
+    style="margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem;">
+    <a class="blog-brand" href="/home">
+        <i class="fa-solid fa-pen-nib me-2" style="font-size:1.1rem;"></i>BlogSpace
+    </a>
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2 py-2 py-lg-0">
+            <li class="nav-item dropdown">
+                <button class="nav-profile-btn dropdown-toggle" type="button" id="profileDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-circle-user"></i> Profile
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li>
+                        <a class="dropdown-item" href="/newpost">
+                            <i class="fa-solid fa-plus-circle" style="color:#a78bfa;"></i> New Post
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/mypost">
+                            <i class="fa-solid fa-bookmark" style="color:#a78bfa;"></i> My Posts
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.1);">
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/signout">
+                            <i class="fa-solid fa-right-from-bracket" style="color:#f87171;"></i> Sign Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="py-5 animated" style="max-width:800px; margin: 0 auto;">
+    <div class="mb-4 mt-2">
+        <h1 class="section-title" style="font-size:2rem;">
+            <i class="fa-solid fa-pen me-2" style="color:var(--accent);"></i>Edit Post
+        </h1>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.3rem;">
+            Update the details of your post below.
+        </p>
+    </div>
+
+    <div class="blog-card" style="padding:2.2rem;">
+        <form method="post">
+            {% csrf_token %}
+
+            
+            <div class="mb-4">
+                <label class="blog-label" for="postTitle">
+                    <i class="fa-solid fa-heading me-1"></i> Post Title
+                </label>
+                <input type="text" class="form-control blog-input" id="postTitle" name="title" value="{{ post.title }}"
+                    placeholder="Enter a captivating title..." autocomplete="off">
+            </div>
+
+           
+            <div class="mb-4">
+                <label class="blog-label" for="postContent">
+                    <i class="fa-solid fa-align-left me-1"></i> Content
+                </label>
+                <textarea class="form-control blog-input" id="postContent" name="content" rows="10"
+                    placeholder="Write your story here..."
+                    style="resize:vertical; min-height:200px;">{{ post.content }}</textarea>
+            </div>
+
+            
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pt-2">
+                <a href="/mypost" style="color:var(--text-secondary); text-decoration:none; font-size:0.9rem;">
+                    <i class="fa-solid fa-arrow-left me-1"></i> Back to My Posts
+                </a>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="/deletepost/{{ post.pk }}/" class="btn-outline-grad"
+                        style="padding:0.55rem 1.3rem; border-color:#f87171; color:#f87171;">
+                        <i class="fa-solid fa-trash"></i> Delete Post
+                    </a>
+                    <button type="submit" class="btn-primary-grad" style="padding:0.65rem 1.8rem; font-size:0.95rem;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
